@@ -3,27 +3,36 @@ by Paul Asquin.
 Tips and documentation to save time when problems occur twice
 
 ## Machine Learning
-### CUDA
+### CUDA & CUDNN
 Setting cuda up should be done with ubuntu repo. Nvidia binary solutions fail too often.
 Keep it simple
 - clean
 ```bash
 sudo rm /etc/apt/sources.list.d/cuda*
-sudo apt remove --autoremove nvidia-*
+sudo apt remove -y --autoremove nvidia-*
+sudo apt-get autoremove -y
+sudo apt-get autoclean -y
 ```
-- prepare
+- prepare, install
 ```bash
 sudo apt update
 sudo add-apt-repository ppa:graphics-drivers
+
+# Ubuntu 18.04
 sudo apt-key adv --fetch-keys  http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
 sudo bash -c 'echo "deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64 /" > /etc/apt/sources.list.d/cuda.list'
 sudo bash -c 'echo "deb http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64 /" > /etc/apt/sources.list.d/cuda_learn.list'
 sudo apt update
-```
-- install
-```bash
-sudo apt install cuda-10-1
-sudo apt install libcudnn7
+sudo apt install -y cuda-10-1
+sudo apt install -y libcudnn7
+
+# Ubuntu 20.04
+sudo apt-key adv --fetch-keys  https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/7fa2af80.pub
+sudo bash -c 'echo "deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64 /" > /etc/apt/sources.list.d/cuda.list'
+sudo bash -c 'echo "deb http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu2004/x86_64 /" > /etc/apt/sources.list.d/cuda_learn.list'
+sudo apt update
+sudo apt install cuda-11-3
+sudo apt install libcudnn8
 ```
 - and check
 ```bash
@@ -67,6 +76,15 @@ nmap IP -Pn
 ### GPU
 - Set Nvida Docker runtime
 [Official tuto is good](https://github.com/NVIDIA/nvidia-container-runtime). I didn't followed the nvidia-docker2 steps, I got issue getting it from the additional ppa, and I decided to manually set the docker runtime config as presented in the steps.
+
+```bash
+curl -s -L https://nvidia.github.io/nvidia-container-runtime/gpgkey | sudo apt-key add -
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+curl -s -L https://nvidia.github.io/nvidia-container-runtime/$distribution/nvidia-container-runtime.list | \
+  sudo tee /etc/apt/sources.list.d/nvidia-container-runtime.list
+sudo apt-get update
+sudo apt-get install -y nvidia-container-runtime
+```
 
 - Test GPU is working
 ```bash
