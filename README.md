@@ -2,7 +2,7 @@
 by Paul Asquin. 
 Tips and documentation to save time when problems occur twice
 
-## Docker
+## Machine Setup
 ### Install Docker
 - From [official documentation](https://docs.docker.com/engine/install/ubuntu/)
 ```bash
@@ -44,8 +44,6 @@ If if fails, you can try
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 ```
 
-
-## Machine Learning
 ### Install CUDA & CUDNN
 Setting cuda up should be done with ubuntu repo. Nvidia binary solutions fail too often.
 Keep it simple
@@ -136,7 +134,7 @@ With all the three installed, we need to use as docker-compose base:
 version: '2.3'
 
 services:
-  your_server:
+  your_service:
     build:
       context: .
       dockerfile: Dockerfile.gpu
@@ -148,6 +146,23 @@ services:
 assuming you are using Dockerfile.gpu and that you want to use GPU#0 only.  
 Docker Compose v3.0 doesn't work for now with nvidia runtime
 
+## Windows Machine Setup
+It will always be easier to work with Docker, Docker Compose and Docker GPU from a Ubuntu machine, 
+still one of the great strength of Docker is to allow you to deploye your projets in any machine.  
+
+You can totally install Docker within windows, and it will come direclty with Docker-Compose. 
+Still, if you want to use GPU capacities + Docker + Windows host machine, you will need to do this through Windows Subsystem for Linux.
+You will find the detailled installation process [here](https://docs.nvidia.com/cuda/wsl-user-guide/index.html) leading you throught the installation
+of the Ubuntu subsystem, Docker, Cuda, and Nvidia-docker.  
+
+Note: when starting a docker image, you may need to use --gpus=all instead of runtime=nvidia. 
+Within a docker-compose.yml file, just use
+```yaml
+services:
+  environment:
+    - NVIDIA_VISIBLE_DEVICES=0`
+# ensure runtime=nvidia is not set
+```
 
 ## Jupyter
 - set a password
