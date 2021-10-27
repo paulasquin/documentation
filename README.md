@@ -252,4 +252,8 @@ prefect agent local start
 python your_file.py
 ```
 - Go to your [cloud dashboard](https://cloud.prefect.io/) or [local dashboard](http://localhost:8080) and run / schedule / monitor your pipeline
-
+- You can run a pipeline direclty using the command line
+```bash
+prefect run -n "FLOW_NAME" --watch
+```
+with flow name as defined inside python file.
