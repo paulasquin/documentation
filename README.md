@@ -204,20 +204,52 @@ Installation
 ```bash
 pip install prefect
 ```
+Terminology:
+- An agent is a worker which will take a pipeline load. It can be a local instance, docker, kubernetes, EC2.
+- A User Interface, it's where the user can monitor the pipeline state. It can be locally served our cloud served
 
-### Set project
+
+### Init Cloud User Interface
 - Create an account & API key on [Prefect](prefect.io) then authenticate
 ```bash
 prefect auth login --key YOUR_KEY
 ```
+- Switch to cloud prefect server
+```bash
+prefect backend cloud
+```
+
+### Init Local User Interface
+You can also have a local user interface for Prefect. To do so
+- Create a server
+```bash
+prefect server start
+```
+- Switch to local prefect server
+```bash
+prefect backend server
+```
+- Create tenant
+```bash
+prefect server create-tenant --name default --slug default
+```
+
+### Create a local agent
 - Create project
 ```bash
 prefect create project "YOUR_NAME"
 ```
-- Define pipeline flow and register it [link](https://docs.prefect.io/orchestration/getting-started/registering-and-running-a-flow.html#register-a-flow)
-- Start a worker agent
+- Create agent
 ```bash
-# For a local agent
 prefect agent local start
 ```
-- Go to your [dashboard](https://cloud.prefect.io/) and run / schedule your pipeline
+
+### Define & Run a pipeline
+
+- Define pipeline flow [link](https://docs.prefect.io/orchestration/getting-started/registering-and-running-a-flow.html#register-a-flow)
+- Register it
+```bash
+python your_file.py
+```
+- Go to your [cloud dashboard](https://cloud.prefect.io/) or [local dashboard](http://localhost:8080) and run / schedule / monitor your pipeline
+
