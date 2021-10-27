@@ -194,5 +194,30 @@ nmap IP -Pn
 ```
 
 
+## Pipeline Management
+In order to track pipeline events and to monitor it from a distant machine, [Prefect](prefect.io) is a good candidate. 
+### Installation
+Requirements:
+- Docker
+- Docker Compose
+Installation
+```bash
+pip install prefect
+```
 
-
+### Set project
+- Create an account & API key on [Prefect](prefect.io) then authenticate
+```bash
+prefect auth login --key YOUR_KEY
+```
+- Create project
+```bash
+prefect create project "YOUR_NAME"
+```
+- Define pipeline flow and register it [link](https://docs.prefect.io/orchestration/getting-started/registering-and-running-a-flow.html#register-a-flow)
+- Start a worker agent
+```bash
+# For a local agent
+prefect agent local start
+```
+- Go to your [dashboard](https://cloud.prefect.io/) and run / schedule your pipeline
