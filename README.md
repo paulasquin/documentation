@@ -257,3 +257,15 @@ python your_file.py
 prefect run -n "FLOW_NAME" --watch
 ```
 with flow name as defined inside python file.
+
+## Documentation
+To generate python documentation on-the-go, pdoc is an amazing tool.  
+Get it
+```bash
+pip install pdoc3
+```
+Generate a documentation server
+```bash
+pdoc --http localhost:4242 YOUR_MODULE
+```
+You can also get documentation in PDF or HTML
