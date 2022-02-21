@@ -82,8 +82,7 @@ sudo apt-key adv --fetch-keys  http://developer.download.nvidia.com/compute/cuda
 sudo bash -c 'echo "deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64 /" > /etc/apt/sources.list.d/cuda.list'
 sudo bash -c 'echo "deb http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64 /" > /etc/apt/sources.list.d/cuda_learn.list'
 sudo apt update
-sudo apt install -y cuda-10-1
-sudo apt install -y libcudnn7
+sudo apt install -y cuda-10-1 ibcudnn7
 ```
 
 - Install for **Ubuntu 20.04**
@@ -93,8 +92,7 @@ sudo apt-key adv --fetch-keys  https://developer.download.nvidia.com/compute/cud
 sudo bash -c 'echo "deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64 /" > /etc/apt/sources.list.d/cuda.list'
 sudo bash -c 'echo "deb http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu2004/x86_64 /" > /etc/apt/sources.list.d/cuda_learn.list'
 sudo apt update
-sudo apt install cuda-11-3
-sudo apt install libcudnn8
+sudo apt install -y cuda-11-3 libcudnn8
 ```
 
 - Reboot your computer, then check
