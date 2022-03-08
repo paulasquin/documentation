@@ -366,3 +366,40 @@ To enter a local Dockerfile machine, run
 ```bash
 docker run -it $(docker build -q .)
 ```
+
+## Github SSH current bug
+Sourced from this [gist](https://gist.github.com/Tamal/1cc77f88ef3e900aeae65f0e5e504794)  
+
+Performing 
+```bash
+git clone ...
+```
+if you get error such as 
+> fatal: Could not read from remote repository.  
+> ssh: connect to host github.com port 22: Connection refused  
+
+- Check that this is not linked to your access rights to a repo 
+running the following line, which should lead to the same error
+```bash
+ssh -T git@github.com
+```
+
+- Ensure that using secured port 443 with ssh is working for this fix
+
+```bash
+ssh -T -p 443 git@ssh.github.com
+```
+> Hi xxxx! You've successfully authenticated, but GitHub does not provide shell access.
+
+- Then, we can add specific rules for ssh github to always use the 443 port
+
+Modify `vim ~/.ssh/config` and add the section
+```
+Host github.com
+  Hostname ssh.github.com
+  Port 443
+```
+- Finally, this command should work
+```bash
+ssh -T git@github.com
+```
