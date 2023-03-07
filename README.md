@@ -3,9 +3,9 @@
 by Paul Asquin.
 Tips and documentation to save time when problems occur twice
 
-## Machine Setup
+# Machine Setup
 
-### Install Docker
+## Install Docker
 
 - From [official documentation](https://docs.docker.com/engine/install/ubuntu/)
 
@@ -35,7 +35,7 @@ You'll need to disconnect then reconnect from your ubuntu account
 docker run hello-world
 ```
 
-### Install Docker Compose
+## Install Docker Compose
 
 ```bash
 sudo curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -54,7 +54,7 @@ If if fails, you can try
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 ```
 
-### Install CUDA & CUDNN
+## Install CUDA & CUDNN
 
 Setting cuda up should be done with ubuntu repo. Nvidia binary solutions fail too often.
 Keep it simple
@@ -147,7 +147,7 @@ sudo pkill -SIGHUP dockerd
 docker run --runtime=nvidia --rm nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04 nvidia-smi
 ```
 
-### Use Docker GPU through Compose
+## Use Docker GPU through Compose
 
 End of the Machine Learning setting journey. Use CUDA + Docker + Docker compose.
 With all the three installed, we need to use as docker-compose base:
@@ -169,7 +169,7 @@ services:
 assuming you are using Dockerfile.gpu and that you want to use GPU#0 only.  
 Docker Compose v3.0 doesn't work for now with nvidia runtime
 
-## Windows Machine Setup
+# Windows Machine Setup
 
 It will always be easier to work with Docker, Docker Compose and Docker GPU from a Ubuntu machine,
 still one of the great strength of Docker is to allow you to deploye your projets in any machine.
@@ -189,7 +189,7 @@ services:
 # ensure runtime=nvidia is not set
 ```
 
-## Jupyter
+# Jupyter
 
 - set a password
 
@@ -197,9 +197,9 @@ services:
 jupyter notebook password
 ```
 
-## Server
+# Server
 
-### UFW
+## UFW
 
 Ubuntu easy to set firewall. [Introduction here](https://www.digitalocean.com/community/tutorials/how-to-setup-a-firewall-with-ufw-on-an-ubuntu-and-debian-cloud-server)  
 **Warning**: when setting up `ufw`, do not forget to allow immediately ssh connection, then disable, then re-enable ufw to apply changes.
@@ -226,11 +226,11 @@ It's possible to see the true mapping with
 nmap IP -Pn
 ```
 
-## Pipeline Management
+# Pipeline Management
 
 In order to track pipeline events and to monitor it from a distant machine, [Prefect](prefect.io) is a good candidate.
 
-### Installation
+## Installation
 
 Requirements:
 
@@ -261,7 +261,7 @@ prefect auth login --key YOUR_KEY
 prefect backend cloud
 ```
 
-### Init Local User Interface
+## Init Local User Interface
 
 You can also have a local user interface for Prefect. To do so
 
@@ -283,7 +283,7 @@ prefect backend server
 prefect server create-tenant --name default --slug default
 ```
 
-### Create a local agent
+## Create a local agent
 
 - Create project
 
@@ -297,7 +297,7 @@ prefect create project "YOUR_NAME"
 prefect agent local start
 ```
 
-### Define & Run a pipeline
+## Define & Run a pipeline
 
 - Define pipeline flow [link](https://docs.prefect.io/orchestration/getting-started/registering-and-running-a-flow.html#register-a-flow)
 - Register it
@@ -315,7 +315,7 @@ prefect run -n "FLOW_NAME" --watch
 
 with flow name as defined inside python file.
 
-## Documentation
+# Python Documentation
 
 To generate python documentation on-the-go, pdoc is an amazing tool.  
 Get it
@@ -332,7 +332,7 @@ pdoc --http localhost:4242 YOUR_MODULE
 
 You can also get documentation in PDF or HTML
 
-## Visual Code
+# Visual Code
 
 Visual Code is quite good to develop in Python. Pycharm is good too, but a bit older in some sense.
 
@@ -357,9 +357,7 @@ Think about running "Install 'code' command in path"
 code .
 ```
 
-
-
-## Docker Dev
+# Docker Dev
 
 To enter a local Dockerfile machine, run
 
@@ -367,7 +365,7 @@ To enter a local Dockerfile machine, run
 docker run -it $(docker build -q .)
 ```
 
-## Github SSH current bug
+# Github SSH current bug
 Sourced from this [gist](https://gist.github.com/Tamal/1cc77f88ef3e900aeae65f0e5e504794)  
 
 Performing 
@@ -403,3 +401,7 @@ Host github.com
 ```bash
 ssh -T git@github.com
 ```
+
+# VPN
+OpenVPN configuration is more fine-tunnable with TunnelBlick.  
+IP-V6 should be disabled from local when running a VPN to avoid any ip-v6 leaks 
